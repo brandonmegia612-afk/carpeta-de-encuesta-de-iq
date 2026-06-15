@@ -1,0 +1,422 @@
+using System;
+using System.Collections.Generic;
+class Preguntas
+{
+    public string Texto{get;set;}
+    public string RespuestaCorrecta{get;set;}
+    public string Explicacion{get;set;}
+    public string? Categoria{get;set;}
+    public Preguntas(string texto, string respuestaCorrecta, string explicacion)
+    {
+        Texto = texto;
+        RespuestaCorrecta = respuestaCorrecta;
+        Explicacion = explicacion;
+    }
+}
+
+class Program
+{
+   static void Main()
+   {
+       // Configurar colores: fondo blanco, texto negro
+       Console.BackgroundColor = ConsoleColor.White;
+       Console.ForegroundColor = ConsoleColor.Black;
+       Console.Clear();
+
+       List<Preguntas> preguntas = new List<Preguntas>();
+
+       int totalQuestions = 120; // más de 100 preguntas
+       var rnd = new Random(0);
+
+       string[] cienciasPreguntas = new string[]
+       {
+           "¿Cuántos planetas tiene el sistema solar?",
+           "¿Cuál es la fórmula química del agua?",
+           "¿A qué temperatura hierve el agua en °C?",
+           "¿Cuál es el símbolo químico del oro?",
+           "¿Cuál es el órgano que bombea la sangre?",
+           "¿Cuál es el gas que respiramos para vivir?",
+           "¿Qué planeta es conocido como el planeta rojo?",
+           "¿Cuál es la unidad básica de la vida?",
+           "¿Qué partícula tiene carga negativa en el átomo?",
+           "¿Qué instrumento mide la temperatura?"
+       };
+
+       string[] cienciasRespuestas = new string[]
+       {
+           "8",
+           "H2O",
+           "100",
+           "Au",
+           "corazón",
+           "oxígeno",
+           "Marte",
+           "célula",
+           "electrón",
+           "termómetro"
+       };
+
+       // Bancos de preguntas/explicaciones para ciencias y programación/ingenierías
+       string[] cienciasPreguntasExp = new string[]
+       {
+           "¿Cuántos planetas tiene el sistema solar?",
+           "¿Cuál es la fórmula química del agua?",
+           "¿A qué temperatura hierve el agua en °C?",
+           "¿Cuál es el símbolo químico del oro?",
+           "¿Cuál es el órgano que bombea la sangre?",
+           "¿Cuál es el gas que respiramos para vivir?",
+           "¿Qué planeta es conocido como el planeta rojo?",
+           "¿Cuál es la unidad básica de la vida?",
+           "¿Qué partícula tiene carga negativa en el átomo?",
+           "¿Qué instrumento mide la temperatura?"
+       };
+
+       string[] cienciasRespuestasExp = new string[]
+       {
+           "8",
+           "H2O",
+           "100",
+           "Au",
+           "corazón",
+           "oxígeno",
+           "Marte",
+           "célula",
+           "electrón",
+           "termómetro"
+       };
+
+       string[] cienciasExplicaciones = new string[]
+       {
+           "El sistema solar tradicionalmente incluye 8 planetas: Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno.",
+           "El agua es una molécula compuesta por dos átomos de hidrógeno y uno de oxígeno, por eso H2O.",
+           "A nivel del mar, el agua hierve a 100 °C bajo presión atmosférica estándar.",
+           "El símbolo químico del oro según la tabla periódica es Au (del latín 'Aurum').",
+           "El corazón es el órgano principal que bombea la sangre por el sistema circulatorio.",
+           "El oxígeno (O2) es el gas esencial que los humanos inhalan para la respiración celular.",
+           "Marte recibe el nombre de planeta rojo por su color debido al óxido de hierro en su superficie.",
+           "La célula es la unidad estructural y funcional básica de los seres vivos.",
+           "El electrón es la partícula subatómica con carga negativa que orbita el núcleo.",
+           "Un termómetro es el instrumento usado para medir la temperatura."
+       };
+
+       // Programación / informática preguntas
+       string[] progPreguntas = new string[]
+       {
+           "¿Cuál es la etiqueta para un enlace en HTML?",
+           "¿Cómo se declara una variable en JavaScript usando ES6?",
+           "En React, ¿qué método se usa para renderizar JSX en el DOM?",
+           "¿Qué es un contenedor liviano común para desplegar aplicaciones?",
+           "¿Cuál es la consulta SQL para seleccionar todas las columnas de la tabla 'users'?",
+           "¿Qué lenguaje es típico para programar en la plataforma .NET (C# o J#)?"
+       };
+
+       string[] progRespuestas = new string[]
+       {
+           "a",
+           "let",
+           "ReactDOM.render",
+           "Docker",
+           "SELECT * FROM users;",
+           "C#"
+       };
+
+       string[] progExplicaciones = new string[]
+       {
+           "En HTML, la etiqueta <a> se usa para enlaces: <a href=\"url\">texto</a>.",
+           "ES6 introdujo 'let' y 'const' para declarar variables con alcance de bloque.",
+           "React usa ReactDOM.render (o createRoot en versiones nuevas) para montar componentes en el DOM.",
+           "Docker es una plataforma de contenedores que empaqueta una aplicación y sus dependencias en un contenedor ligero.",
+           "La sentencia SQL 'SELECT * FROM users;' devuelve todas las columnas y filas de la tabla 'users'.",
+           "Dentro de .NET, C# es el lenguaje más usado; J# fue un lenguaje heredado menos común."
+       };
+
+       // Ingeniería / Medicina / Arquitectura preguntas
+       string[] temasIngPreg = new string[]
+       {
+           "Medicina: ¿Cuál es la unidad funcional del riñón?",
+           "Ingeniería civil: ¿Qué es una viga de carga?",
+           "Arquitectura: ¿Qué es un muro de carga?",
+           "Ingeniería software: ¿Qué es 'refactorizar' código?",
+           "Bases de datos: ¿Qué es una clave primaria?",
+           "Contenedores: ¿Qué comando inicia un contenedor en Docker?"
+       };
+
+       string[] temasIngResp = new string[]
+       {
+           "nefrona",
+           "Elemento estructural que soporta y distribuye cargas",
+           "Un muro que soporta peso estructural del edificio",
+           "Modificar el código para mejorar estructura sin cambiar comportamiento",
+           "Un identificador único para cada fila en una tabla",
+           "docker run"
+       };
+
+       string[] temasIngExp = new string[]
+       {
+           "La nefrona es la unidad funcional del riñón responsable de filtrar la sangre y formar la orina.",
+           "Una viga de carga transmite fuerzas entre soportes y evita la deformación excesiva en estructuras.",
+           "Un muro de carga soporta el peso de elementos superiores y lo transmite a la cimentación.",
+           "Refactorizar significa reorganizar y limpiar código para facilitar mantenimiento sin alterar su comportamiento observable.",
+           "La clave primaria es un campo (o combinación) que identifica de forma única cada registro en una tabla.",
+           "El comando 'docker run' crea y arranca un contenedor a partir de una imagen Docker."
+       };
+
+       for (int i = 0; i < totalQuestions; i++)
+       {
+           int op = rnd.Next(8); // 0:+ 1:- 2:* 3:/ 4:física 5:ciencia 6:programación 7:ingenierías/medicina
+           string texto = string.Empty;
+           string respuesta = string.Empty;
+           string explicacion = string.Empty;
+           string categoria = "General";
+
+           switch (op)
+           {
+               case 0:
+                   {
+                       categoria = "Matematicas";
+                       int a = rnd.Next(2, 201);
+                       int b = rnd.Next(2, 201);
+                       texto = $"Matemáticas: ¿cuánto es {a} + {b}?";
+                       respuesta = (a + b).ToString();
+                       explicacion = "Suma: se suman los valores de los operandos para obtener el resultado.";
+                       break;
+                   }
+               case 1:
+                   {
+                       categoria = "Matematicas";
+                       int a = rnd.Next(2, 201);
+                       int b = rnd.Next(0, a);
+                       texto = $"Matemáticas: ¿cuánto es {a} - {b}?";
+                       respuesta = (a - b).ToString();
+                       explicacion = "Resta: se sustrae el segundo operando del primero.";
+                       break;
+                   }
+               case 2:
+                   {
+                       categoria = "Matematicas";
+                       int a = rnd.Next(2, 51);
+                       int b = rnd.Next(2, 21);
+                       texto = $"Matemáticas: ¿cuánto es {a} * {b}?";
+                       respuesta = (a * b).ToString();
+                       explicacion = "Multiplicación: producto de los dos operandos.";
+                       break;
+                   }
+               case 3:
+                   {
+                       categoria = "Matematicas";
+                       int b = rnd.Next(2, 13);
+                       int res = rnd.Next(2, 21);
+                       int a = res * b; // divisible
+                       texto = $"Matemáticas: ¿cuánto es {a} / {b}?";
+                       respuesta = res.ToString();
+                       explicacion = "División: cuántas veces cabe el divisor en el dividendo.";
+                       break;
+                   }
+               case 4:
+                   {
+                       categoria = "Fisica";
+                       int tipoFis = rnd.Next(3);
+                       switch (tipoFis)
+                       {
+                           case 0:
+                               {
+                                   int m = rnd.Next(1, 51);
+                                   int a = rnd.Next(1, 11);
+                                   texto = $"Física: ¿Cuál es la fuerza (F=ma) si m={m} kg y a={a} m/s^2?";
+                                   respuesta = (m * a).ToString();
+                                   explicacion = "Ley de Newton: F = m · a; multiplicar masa por aceleración da la fuerza en newtons.";
+                                   break;
+                               }
+                           case 1:
+                               {
+                                   int t = rnd.Next(1, 11);
+                                   int v = rnd.Next(1, 31);
+                                   int d = v * t; // distance
+                                   texto = $"Física: ¿Cuál es la velocidad si recorre {d} m en {t} s? (m/s)";
+                                   respuesta = v.ToString();
+                                   explicacion = "Velocidad media = distancia / tiempo.";
+                                   break;
+                               }
+                           default:
+                               {
+                                   int m = rnd.Next(1, 21);
+                                   int h = rnd.Next(1, 21);
+                                   int g = 10; // aproximado
+                                   texto = $"Física: ¿Cuál es la energía potencial (mgh) si m={m} kg, g={g} m/s^2 y h={h} m? (J)";
+                                   respuesta = (m * g * h).ToString();
+                                   explicacion = "Energía potencial gravitatoria: E = m · g · h.";
+                                   break;
+                               }
+                       }
+                       break;
+                   }
+               case 5:
+                   {
+                       categoria = "Ciencias";
+                       int idx = rnd.Next(cienciasPreguntasExp.Length);
+                       texto = $"Ciencias: {cienciasPreguntasExp[idx]}";
+                       respuesta = cienciasRespuestasExp[idx];
+                       explicacion = cienciasExplicaciones[idx];
+                       break;
+                   }
+               case 6:
+                   {
+                       categoria = "Programacion";
+                       int idx = rnd.Next(progPreguntas.Length);
+                       texto = $"Programación: {progPreguntas[idx]}";
+                       respuesta = progRespuestas[idx];
+                       explicacion = progExplicaciones[idx];
+                       break;
+                   }
+               default:
+                   {
+                       categoria = "Ingenieria";
+                       int idx = rnd.Next(temasIngPreg.Length);
+                       texto = $"Tema: {temasIngPreg[idx]}";
+                       respuesta = temasIngResp[idx];
+                       explicacion = temasIngExp[idx];
+                       break;
+                   }
+           }
+
+           preguntas.Add(new Preguntas(texto, respuesta, explicacion) { Categoria = categoria });
+       }
+
+       // Permitir al usuario filtrar por tema
+       Console.WriteLine();
+       Console.WriteLine("Elige un tema para reducir preguntas:");
+       Console.WriteLine("1) Matematicas\n2) Fisica\n3) Ciencias\n4) Programacion\n5) Ingenieria/Medicina\n6) Todas");
+       Console.Write("Selecciona número (1-6): ");
+       string opcion = Console.ReadLine() ?? "6";
+       int optNum = 6;
+       int.TryParse(opcion.Trim(), out optNum);
+       string categoriaSeleccionada = "Todas";
+       switch (optNum)
+       {
+           case 1: categoriaSeleccionada = "Matematicas"; break;
+           case 2: categoriaSeleccionada = "Fisica"; break;
+           case 3: categoriaSeleccionada = "Ciencias"; break;
+           case 4: categoriaSeleccionada = "Programacion"; break;
+           case 5: categoriaSeleccionada = "Ingenieria"; break;
+           default: categoriaSeleccionada = "Todas"; break;
+       }
+
+       Console.Write($"Cuántas preguntas quieres (max {preguntas.Count})? ");
+       string cntStr = Console.ReadLine() ?? perguntasCountDefault();
+       int requested = preguntas.Count;
+       if (!int.TryParse(cntStr.Trim(), out requested) || requested <= 0) requested = preguntas.Count;
+
+       var listaFiltrada = preguntas;
+       if (categoriaSeleccionada != "Todas")
+           listaFiltrada = preguntas.FindAll(p => p.Categoria == categoriaSeleccionada);
+
+       if (requested > listaFiltrada.Count) requested = listaFiltrada.Count;
+
+       Console.WriteLine($"Preparando {requested} preguntas del tema: {categoriaSeleccionada}");
+
+       // Reasignar la lista de preguntas a iterar
+       preguntas = listaFiltrada.GetRange(0, requested);
+
+       string perguntasCountDefault(){ return preguntas.Count.ToString(); }
+
+       int aciertos = 0;
+
+       for (int i = 0; i < preguntas.Count; i++)
+       {
+           var pregunta = preguntas[i];
+           Console.WriteLine($"{i + 1}. {pregunta.Texto}");
+           Console.Write("> ");
+           string respuestaUsuario = Console.ReadLine() ?? string.Empty;
+
+           if (respuestaUsuario.Trim().Equals(pregunta.RespuestaCorrecta, StringComparison.OrdinalIgnoreCase))
+           {
+               aciertos++;
+               Console.ForegroundColor = ConsoleColor.Red; // respuestas en rojo
+               Console.WriteLine("¡Respuesta correcta!");
+               Console.ForegroundColor = ConsoleColor.Black;
+           }
+           else
+           {
+               Console.ForegroundColor = ConsoleColor.Red; // respuestas en rojo
+               Console.WriteLine($"Respuesta incorrecta. La respuesta correcta es: {pregunta.RespuestaCorrecta}");
+               if (!string.IsNullOrEmpty(pregunta.Explicacion))
+               {
+                   Console.WriteLine($"Explicación: {pregunta.Explicacion}");
+               }
+               Console.ForegroundColor = ConsoleColor.Black;
+           }
+       }
+
+       double porcentaje = (double)aciertos / preguntas.Count;
+       int iqEstimado = 70 + (int)(porcentaje * 60);
+
+       Console.WriteLine();
+       Console.WriteLine($"aciertos: {aciertos} de {preguntas.Count}");
+       Console.WriteLine($"Porcentaje de aciertos: {porcentaje:P2}");
+       Console.WriteLine($"IQ estimado: {iqEstimado}");
+
+       // Exportar preguntas filtradas a JSON y CSV
+       ExportarPreguntas(preguntas, categoriaSeleccionada);
+
+       Console.ResetColor();
+   }
+
+   static void ExportarPreguntas(List<Preguntas> preguntas, string tema)
+   {
+       string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+       string jsonFile = $"preguntas_{tema}_{timestamp}.json";
+       string csvFile = $"preguntas_{tema}_{timestamp}.csv";
+
+       // Exportar a JSON
+       using (System.IO.StreamWriter writer = new System.IO.StreamWriter(jsonFile))
+       {
+           writer.WriteLine("[");
+           for (int i = 0; i < preguntas.Count; i++)
+           {
+               var p = preguntas[i];
+               writer.WriteLine("  {");
+               writer.WriteLine($"    \"id\": {i + 1},");
+               writer.WriteLine($"    \"pregunta\": \"{EscapeJson(p.Texto)}\",");
+               writer.WriteLine($"    \"respuestaCorrecta\": \"{EscapeJson(p.RespuestaCorrecta)}\",");
+               writer.WriteLine($"    \"explicacion\": \"{EscapeJson(p.Explicacion ?? "")}\",");
+               writer.WriteLine($"    \"categoria\": \"{EscapeJson(p.Categoria ?? "General")}\"");
+               if (i < preguntas.Count - 1)
+                   writer.WriteLine("  },");
+               else
+                   writer.WriteLine("  }");
+           }
+           writer.WriteLine("]");
+       }
+
+       // Exportar a CSV
+       using (System.IO.StreamWriter writer = new System.IO.StreamWriter(csvFile))
+       {
+           writer.WriteLine("id,pregunta,respuestaCorrecta,explicacion,categoria");
+           for (int i = 0; i < preguntas.Count; i++)
+           {
+               var p = preguntas[i];
+               writer.WriteLine($"{i + 1},\"{EscapeCsv(p.Texto)}\",\"{EscapeCsv(p.RespuestaCorrecta)}\",\"{EscapeCsv(p.Explicacion ?? "")}\",\"{EscapeCsv(p.Categoria ?? "General")}\"");
+           }
+       }
+
+       Console.ForegroundColor = ConsoleColor.Red;
+       Console.WriteLine($"\nArchivos exportados:");
+       Console.WriteLine($"  JSON: {jsonFile}");
+       Console.WriteLine($"  CSV:  {csvFile}");
+       Console.ForegroundColor = ConsoleColor.Black;
+   }
+
+   static string EscapeJson(string text)
+   {
+       if (string.IsNullOrEmpty(text)) return "";
+       return text.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\n", "\\n").Replace("\r", "\\r");
+   }
+
+   static string EscapeCsv(string text)
+   {
+       if (string.IsNullOrEmpty(text)) return "";
+       if (text.Contains(",") || text.Contains("\"") || text.Contains("\n"))
+           return $"\"{text.Replace("\"", "\"\"")}\"";
+       return text;
+   }
+}
